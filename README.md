@@ -5,7 +5,7 @@ Engineer based in Dublin, Ireland. Built with Next.js 15 (App Router),
 TypeScript, Tailwind CSS v4 and Framer Motion — dark-mode-first, glassmorphic,
 fully responsive, accessible and SEO-optimized.
 
-**Live site:** [atanusamadder.dev](https://atanusamadder.dev) _(update once deployed)_
+**Live site:** [atanusamadder.dev](https://atanusamadder.dev) — statically exported and hosted on **GitHub Pages**, deployed automatically via GitHub Actions on every push to `main`.
 
 ## Features
 
@@ -59,8 +59,8 @@ hot-reloads as you edit files under `src/`.
 | Script               | Purpose                                      |
 | --------------------- | --------------------------------------------- |
 | `npm run dev`         | Start the dev server                          |
-| `npm run build`       | Production build (also type-checks)           |
-| `npm run start`       | Serve the production build                    |
+| `npm run build`       | Static export build (also type-checks) → `out/` |
+| `npm run start`       | Serve the exported `out/` folder locally      |
 | `npm run lint`        | Run ESLint                                    |
 | `npm run lint:fix`    | Run ESLint and auto-fix issues                |
 | `npm run type-check`  | Run `tsc --noEmit` on its own                 |
@@ -77,8 +77,7 @@ src/
 │   ├── manifest.ts         # Web app manifest
 │   ├── opengraph-image.tsx # Dynamically generated OG image
 │   ├── robots.ts           # robots.txt
-│   ├── sitemap.ts          # sitemap.xml
-│   └── api/contact/route.ts# Contact form submission endpoint
+│   └── sitemap.ts          # sitemap.xml
 ├── components/
 │   ├── ui/                 # Generic, reusable primitives (Button, Modal,
 │   │                       # Reveal, Spotlight, IconCard, ProficiencyRing…)
@@ -113,39 +112,55 @@ variable is supported — copy `.env.example` to `.env.local` to override it:
 
 | Variable                | Default                        | Purpose                                                                 |
 | ------------------------ | ------------------------------- | ------------------------------------------------------------------------ |
-| `NEXT_PUBLIC_SITE_URL`   | `https://atanusamadder.dev`     | Base URL used for canonical links, OG/Twitter images, sitemap, robots.txt and JSON-LD. Set this per-environment (e.g. a Vercel preview URL) so metadata always points at the right domain. |
+| `NEXT_PUBLIC_SITE_URL`   | `https://atanusamadder.dev`     | Base URL used for canonical links, OG/Twitter images, sitemap, robots.txt and JSON-LD. Set this per-environment so metadata always points at the right domain. |
 
-The contact form (`src/app/api/contact/route.ts`) currently validates and
-logs submissions server-side. To send real emails, wire in a provider (e.g.
-[Resend](https://resend.com), SendGrid, or SMTP via Nodemailer) inside that
-route and add whatever API key it needs as an additional environment
-variable.
+The site is a **static export** (`output: "export"` in `next.config.ts`),
+so there's no server at runtime — the contact form doesn't POST to an API
+route. Instead, submitting it opens the visitor's own email client via a
+pre-filled `mailto:` link to `src/config/site.ts`'s `author.email`. If you
+later move to a host that supports server functions (Vercel, Netlify, etc.),
+you can restore a real API route and swap in a provider like
+[Resend](https://resend.com) or SendGrid.
 
-## Deploying to Vercel
+## Deploying to GitHub Pages (current setup)
 
-This is a zero-config Next.js app — no `vercel.json` needed.
+The repo already includes everything needed — `.github/workflows/deploy.yml`
+builds and publishes the site on every push to `main`:
 
-1. Push the repository to GitHub/GitLab/Bitbucket.
-2. In the [Vercel dashboard](https://vercel.com/new), import the repository.
-   Vercel auto-detects Next.js and sets the correct build (`next build`) and
-   output settings.
-3. Add the `NEXT_PUBLIC_SITE_URL` environment variable set to your production
-   domain (e.g. `https://atanusamadder.dev`) under **Project Settings →
-   Environment Variables**, for Production (and Preview, if you want preview
-   deployments to self-reference correctly).
-4. Deploy. Every push to the default branch redeploys Production; every PR
-   gets a Preview deployment automatically.
-5. Once you have a custom domain, add it under **Project Settings →
-   Domains** and update `NEXT_PUBLIC_SITE_URL` (and the fallback in
+1. **Enable Pages**: in the GitHub repo, go to **Settings → Pages** and set
+   **Source** to **GitHub Actions** (not "Deploy from a branch").
+2. **Push to `main`**: the `Deploy to GitHub Pages` workflow runs
+   automatically — lint, type-check, `next build` (static export to `out/`),
+   then `actions/deploy-pages`. Check progress under the **Actions** tab.
+3. **Custom domain**: `public/CNAME` already contains `atanusamadder.dev`,
+   so it's included in every export and GitHub picks it up automatically.
+   If you use a different domain, edit that file (and `NEXT_PUBLIC_SITE_URL`
+   in `.env.example` / your environment, plus the fallback in
    `src/config/site.ts`) to match.
+4. **DNS**: at your domain registrar, point the apex domain at GitHub Pages:
+   - Add four **A** records for `@` (or the domain root) to:
+     `185.199.108.153`, `185.199.109.153`, `185.199.110.153`, `185.199.111.153`
+   - Optionally add **AAAA** records for IPv6:
+     `2606:50c0:8000::153`, `2606:50c0:8001::153`, `2606:50c0:8002::153`, `2606:50c0:8003::153`
+   - If you'd rather use `www.atanusamadder.dev`, use a **CNAME** record
+     pointing to `<your-github-username>.github.io` instead, and update
+     `public/CNAME` to the `www` host.
+5. Back in **Settings → Pages**, once DNS resolves, GitHub verifies the
+   domain and offers **Enforce HTTPS** — enable it (certificate
+   provisioning can take a little while after DNS first propagates).
 
-Alternatively, via the CLI:
+DNS propagation can take anywhere from a few minutes to ~24 hours. You can
+check status with `dig atanusamadder.dev +noall +answer`.
 
-```bash
-npm i -g vercel
-vercel        # first deploy, links the project
-vercel --prod # promote to production
-```
+### Deploying to Vercel instead
+
+Because this app is configured for static export, `next dev`/`next build`
+still work identically on Vercel — it's a zero-config Next.js app there too.
+If you switch back to Vercel (e.g. to restore a real server-side contact
+form), just remove `output: "export"` / `images.unoptimized` from
+`next.config.ts`, import the repo at [vercel.com/new](https://vercel.com/new),
+and set `NEXT_PUBLIC_SITE_URL` under **Project Settings → Environment
+Variables**.
 
 ### Updating personal content before your own deploy
 
@@ -164,10 +179,10 @@ vercel --prod # promote to production
   never `opacity`, so the browser can paint it immediately rather than
   waiting for JS hydration — this was the single biggest Lighthouse
   Performance win during development.
-- Run `npm run build && npm run start`, then audit with Lighthouse (Chrome
-  DevTools → Lighthouse, or `npx lighthouse http://localhost:3000 --view`)
-  against the production build — the dev server includes unminified/HMR
-  overhead that skews scores.
+- Run `npm run build` (outputs the static export to `out/`), serve it with
+  any static file server (e.g. `npx serve out`), then audit with Lighthouse
+  against that build — the dev server includes unminified/HMR overhead that
+  skews scores.
 
 ## License
 

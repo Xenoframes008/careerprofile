@@ -10,6 +10,13 @@ const nextConfig: NextConfig = {
   // your environment.
   outputFileTracingRoot: path.join(__dirname),
   poweredByHeader: false,
+  // Hosted as a static site on GitHub Pages — there's no Node server to run
+  // Next's Image Optimization API or dynamic API routes, so both are
+  // disabled/avoided in favor of static-export-compatible equivalents.
+  output: "export",
+  images: {
+    unoptimized: true,
+  },
 };
 
 export default nextConfig;

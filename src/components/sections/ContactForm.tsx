@@ -2,12 +2,19 @@
 
 import { useId, useState, type FormEvent } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { AlertCircle, Loader2, Send } from "lucide-react";
+import { AlertCircle, Loader2, Mail } from "lucide-react";
 import { Spotlight } from "@/components/ui/Spotlight";
 import { Button } from "@/components/ui/Button";
 import { validateContactForm, type ContactFormErrors } from "@/lib/contactValidation";
 import { cn } from "@/lib/utils";
+import { siteConfig } from "@/config/site";
 import type { ContactFormValues } from "@/types";
+
+function buildMailtoUrl(values: ContactFormValues) {
+  const subject = `[Portfolio] ${values.subject}`;
+  const body = `${values.message}\n\n— ${values.name} (${values.email})`;
+  return `mailto:${siteConfig.author.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+}
 
 const INITIAL_VALUES: ContactFormValues = {
   name: "",
@@ -37,7 +44,7 @@ export function ContactForm() {
     setErrors(validateContactForm(values));
   };
 
-  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     const validationErrors = validateContactForm(values);
@@ -48,16 +55,13 @@ export function ContactForm() {
 
     setStatus("submitting");
 
+    // Statically hosted (no backend) — hand off to the visitor's own email
+    // client with the message pre-filled, rather than posting to a server.
+    // The short delay lets the OS's app-switch happen before the success
+    // state replaces the form, instead of an instant, jarring flash.
     try {
-      const response = await fetch("/api/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(values),
-      });
-
-      if (!response.ok) throw new Error("Request failed");
-
-      setStatus("success");
+      window.location.href = buildMailtoUrl(values);
+      window.setTimeout(() => setStatus("success"), 500);
     } catch {
       setStatus("error");
     }
@@ -119,9 +123,10 @@ export function ContactForm() {
               />
             </svg>
             <div>
-              <p className="text-lg font-semibold text-foreground">Message sent!</p>
+              <p className="text-lg font-semibold text-foreground">Almost there!</p>
               <p className="mt-1.5 max-w-sm text-sm leading-6 text-foreground-muted">
-                Thanks for reaching out — I&apos;ll get back to you as soon as possible.
+                Your email app should now be open with the message pre-filled — hit send
+                there and I&apos;ll get back to you as soon as possible.
               </p>
             </div>
             <Button type="button" variant="glass" onClick={resetForm} className="mt-2">
@@ -263,12 +268,12 @@ export function ContactForm() {
               {status === "error" && (
                 <p className="flex items-center gap-2 rounded-xl bg-red-400/10 px-4 py-3 text-sm text-red-400">
                   <AlertCircle className="h-4 w-4 shrink-0" aria-hidden="true" />
-                  Something went wrong sending your message. Please try again or email me
-                  directly.
+                  Couldn&apos;t open your email client. Please email me directly at{" "}
+                  {siteConfig.author.email}.
                 </p>
               )}
               {status === "submitting" && (
-                <span className="sr-only">Sending your message…</span>
+                <span className="sr-only">Opening your email client…</span>
               )}
             </div>
 
@@ -281,11 +286,11 @@ export function ContactForm() {
               {status === "submitting" ? (
                 <>
                   <Loader2 className="h-4 w-4 animate-spin" aria-hidden="true" />
-                  Sending...
+                  Opening...
                 </>
               ) : (
                 <>
-                  <Send className="h-4 w-4" aria-hidden="true" />
+                  <Mail className="h-4 w-4" aria-hidden="true" />
                   Send Message
                 </>
               )}
