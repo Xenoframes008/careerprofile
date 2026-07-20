@@ -19,7 +19,7 @@ const INFO_ITEMS = [
   {
     icon: Github,
     label: "GitHub",
-    value: "atanusamadder",
+    value: "Xenoframes008",
     href: siteConfig.links.github,
   },
   {

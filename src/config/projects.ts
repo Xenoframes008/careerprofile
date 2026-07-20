@@ -55,6 +55,6 @@ export const projects: Project[] = [
     techStack: ["Java", "Selenium WebDriver", "Cucumber", "Page Object Model"],
     tags: ["Automation", "Selenium"],
     status: "In Progress",
-    githubUrl: "https://github.com/atanusamadder",
+    githubUrl: "https://github.com/Xenoframes008",
   },
 ];

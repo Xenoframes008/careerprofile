@@ -42,12 +42,12 @@ export const siteConfig = {
   ],
   author: {
     name: "Atanu Samadder",
-    email: "hello@atanusamadder.dev",
+    email: "atanu.samadder008@outlook.com",
   },
   links: {
-    github: "https://github.com/atanusamadder",
+    github: "https://github.com/Xenoframes008",
     linkedin: "https://www.linkedin.com/in/atanusamadder2022/",
-    email: "mailto:hello@atanusamadder.dev",
+    email: "mailto:atanu.samadder008@outlook.com",
   },
 } as const;
 
