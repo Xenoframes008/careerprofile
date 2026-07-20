@@ -23,7 +23,7 @@ export function IconCard({
   const Heading = headingLevel;
 
   return (
-    <Reveal index={index} className="h-full">
+    <Reveal index={index} whileHover={{ y: -4 }} className="h-full">
       <Spotlight
         className={cn(
           "glass group flex h-full flex-col gap-4 overflow-hidden rounded-2xl p-6 transition-colors duration-300 hover:border-border-strong",
