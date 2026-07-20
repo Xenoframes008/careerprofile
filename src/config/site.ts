@@ -2,20 +2,26 @@ import type { NavItem, SocialLink } from "@/types";
 
 export const siteConfig = {
   name: "Atanu Samadder",
-  role: "Senior Software QA Engineer",
+  role: "Senior Software Quality Assurance Analyst",
   location: "Dublin, Ireland",
   company: "Expleo Group",
   tagline: "Building confidence in software, one test at a time.",
   description:
-    "Portfolio of Atanu Samadder, a Senior Software QA Engineer based in Dublin, Ireland, specializing in test automation, manual & exploratory testing, and quality-first software delivery.",
-  introduction:
-    "I'm a Senior Software QA Engineer based in Dublin, Ireland, with 5+ years of experience delivering enterprise-grade quality across the full testing lifecycle. ISTQB® Certified, I specialize in functional & regression testing, SQL-driven data validation, defect triage, and building resilient automation frameworks with Playwright and Selenium that help teams ship with confidence.",
-  roles: [
-    "Software QA Engineer",
-    "Test Automation Specialist",
-    "ISTQB® Certified Tester",
-    "Quality Advocate",
-  ],
+    "Portfolio of Atanu Samadder, a Senior Software Quality Assurance Analyst and Acting QA Lead based in Dublin, Ireland, specializing in test automation, manual & exploratory testing, and quality-first software delivery.",
+  /** Hero-only copy — kept short so recruiters grasp value in ~5 seconds. */
+  hero: {
+    title: "Senior Software Quality Assurance Analyst",
+    subtitle: "Acting QA Lead · Current Client Engagement",
+    headline: "5+ years delivering enterprise software quality — currently leading QA on a client programme.",
+    specialties: [
+      "Manual Testing",
+      "Test Automation",
+      "SQL Validation",
+      "REST API Testing",
+      "Playwright",
+      "ISTQB Certified",
+    ],
+  },
   // Overridable via NEXT_PUBLIC_SITE_URL so preview/staging deployments
   // (e.g. on Vercel) generate correct canonical URLs, OG images and JSON-LD
   // without a code change — falls back to the production domain.
@@ -24,16 +30,17 @@ export const siteConfig = {
   resumeUrl: "/resume.pdf",
   keywords: [
     "Atanu Samadder",
-    "Software QA Engineer Dublin",
-    "QA Engineer Ireland",
-    "Software Test Engineer",
+    "Senior Software Quality Assurance Analyst Dublin",
+    "QA Analyst Ireland",
+    "Acting QA Lead",
+    "Software Test Analyst",
     "Manual Tester",
     "Automation Tester",
-    "Playwright Engineer",
-    "Selenium Engineer",
+    "Playwright Tester",
+    "Selenium Tester",
     "ISTQB Certified",
     "Software Testing Portfolio",
-    "QA Automation Engineer",
+    "QA Automation Analyst",
     "Test Automation",
     "Manual Testing",
     "API Testing",
