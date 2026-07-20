@@ -1,0 +1,3 @@
+# Drop certificate PDFs / images here, then reference them from
+# src/config/certifications.ts via `downloadUrl` or `previewImage`.
+# Example: downloadUrl: "/certificates/istqb-ctfl-4.pdf"

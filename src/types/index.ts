@@ -57,8 +57,15 @@ export interface Certification {
   title: string;
   issuer: string;
   issueDate: string;
+  /** Optional personal / board credential number shown in the preview modal. */
+  credentialId?: string;
   credentialUrl?: string;
   credentialLabel?: string;
+  /** Optional PDF/image under `public/` for the Download action. */
+  downloadUrl?: string;
+  /** Optional real certificate image; falls back to the stylised visual. */
+  previewImage?: string;
+  /** Skills covered — shown on the card and in the modal. */
   technology: string[];
   summary: string;
 }

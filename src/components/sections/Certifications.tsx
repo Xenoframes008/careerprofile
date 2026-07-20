@@ -12,7 +12,7 @@ export function Certifications() {
         <SectionHeading
           eyebrow="Certifications"
           title="Credentials that back the craft"
-          description="Standards-based qualifications that reinforce a structured, repeatable approach to quality — more are added as they're earned."
+          description="Click any certificate for a full preview, credential details, skills covered, and verification — add more anytime in config."
         />
 
         <div className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
