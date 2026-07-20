@@ -1,10 +1,12 @@
 import { Award } from "lucide-react";
-import { cn } from "@/lib/utils";
+import Image from "next/image";
+import { cn, withBasePath } from "@/lib/utils";
 
 interface CertificateVisualProps {
   title: string;
   issuer: string;
   issueDate: string;
+  previewImage?: string;
   size?: "sm" | "lg";
   className?: string;
 }
@@ -13,10 +15,33 @@ export function CertificateVisual({
   title,
   issuer,
   issueDate,
+  previewImage,
   size = "sm",
   className,
 }: CertificateVisualProps) {
   const isLarge = size === "lg";
+
+  if (previewImage) {
+    return (
+      <div
+        className={cn(
+          "relative isolate overflow-hidden rounded-2xl border border-border-strong bg-background-secondary",
+          isLarge ? "aspect-[4/3]" : "aspect-[16/10]",
+          className,
+        )}
+      >
+        <Image
+          src={withBasePath(previewImage)}
+          alt={`${title} certificate`}
+          fill
+          sizes={isLarge ? "(min-width: 768px) 640px, 100vw" : "320px"}
+          className="object-cover object-center"
+          draggable={false}
+        />
+        <div className="absolute inset-0 bg-linear-to-t from-background/50 via-transparent to-transparent" />
+      </div>
+    );
+  }
 
   return (
     <div
@@ -28,12 +53,8 @@ export function CertificateVisual({
       aria-hidden="true"
     >
       <div className="absolute inset-3 rounded-xl border border-dashed border-accent-secondary/30" />
-      <div
-        className="pointer-events-none absolute -top-10 -right-10 h-40 w-40 rounded-full bg-accent/25 blur-3xl"
-      />
-      <div
-        className="pointer-events-none absolute -bottom-10 -left-10 h-40 w-40 rounded-full bg-accent-secondary/20 blur-3xl"
-      />
+      <div className="pointer-events-none absolute -top-10 -right-10 h-40 w-40 rounded-full bg-accent/25 blur-3xl" />
+      <div className="pointer-events-none absolute -bottom-10 -left-10 h-40 w-40 rounded-full bg-accent-secondary/20 blur-3xl" />
 
       <div className="relative flex h-full flex-col items-center justify-center gap-3 text-center">
         <span

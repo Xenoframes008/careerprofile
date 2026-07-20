@@ -83,7 +83,7 @@ export function Modal({ isOpen, onClose, labelledBy, children, className }: Moda
             transition={{ duration: 0.2 }}
             onClick={onClose}
             aria-hidden="true"
-            className="absolute inset-0 bg-black/70 backdrop-blur-sm"
+            className="absolute inset-0 bg-black/65 backdrop-blur-md supports-[backdrop-filter]:bg-black/55"
           />
 
           <motion.div
