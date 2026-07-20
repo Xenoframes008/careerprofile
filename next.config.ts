@@ -1,6 +1,13 @@
 import type { NextConfig } from "next";
 import path from "path";
 
+// Project sites on GitHub Pages are served under `/<repo>/` (e.g.
+// `https://xenoframes008.github.io/careerprofile/`). Without matching
+// basePath/assetPrefix, CSS/JS/fonts resolve to `/_next/...` on the domain
+// root and 404 — leaving an unstyled page with no animations. Leave the env
+// unset (or empty) when hosting at a custom-domain apex like atanusamadder.dev.
+const basePath = (process.env.NEXT_PUBLIC_BASE_PATH ?? "").replace(/\/$/, "");
+
 const nextConfig: NextConfig = {
   // Pins the workspace root to this project directory. Without this, Next.js
   // walks up the filesystem looking for lockfiles and can pick the wrong
@@ -17,6 +24,12 @@ const nextConfig: NextConfig = {
   images: {
     unoptimized: true,
   },
+  ...(basePath
+    ? {
+        basePath,
+        assetPrefix: basePath,
+      }
+    : {}),
 };
 
 export default nextConfig;

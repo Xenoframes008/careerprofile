@@ -38,6 +38,12 @@ jobs:
           npm run type-check
 
       - name: Build static export
+        env:
+          # Project Pages URL is /careerprofile — must prefix all asset paths
+          # or CSS/JS 404 and the site renders unstyled. Drop this (and rebuild)
+          # once the custom apex domain is the only public URL.
+          NEXT_PUBLIC_BASE_PATH: /careerprofile
+          NEXT_PUBLIC_SITE_URL: https://xenoframes008.github.io/careerprofile
         run: npm run build
 
       - name: Setup Pages
