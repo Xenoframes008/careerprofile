@@ -50,6 +50,38 @@
       opacity: 1;
     }
   }
+  @keyframes twinkle-drift {
+    0%,
+    100% {
+      transform: translate3d(0, 0, 0);
+      opacity: var(--particle-opacity, 0.3);
+    }
+    50% {
+      transform: translate3d(6px, -14px, 0);
+      opacity: calc(var(--particle-opacity, 0.3) * 0.35);
+    }
+  }
+  @keyframes blob-drift-a {
+    0%,
+    100% {
+      transform: translate3d(0, 0, 0) scale(1);
+    }
+    33% {
+      transform: translate3d(4%, 6%, 0) scale(1.08);
+    }
+    66% {
+      transform: translate3d(-3%, -4%, 0) scale(0.96);
+    }
+  }
+  @keyframes blob-drift-b {
+    0%,
+    100% {
+      transform: translate3d(0, 0, 0) scale(1);
+    }
+    50% {
+      transform: translate3d(-6%, 5%, 0) scale(1.1);
+    }
+  }
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -152,5 +184,25 @@ body {
     outline: 2px solid var(--accent-secondary);
     outline-offset: 3px;
     border-radius: 6px;
+  }
+
+  .particle-dot {
+    animation: twinkle-drift linear infinite;
+  }
+
+  .blob-a {
+    animation: blob-drift-a 22s ease-in-out infinite;
+  }
+
+  .blob-b {
+    animation: blob-drift-b 26s ease-in-out infinite;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .particle-dot,
+  .blob-a,
+  .blob-b {
+    animation: none !important;
   }
 }

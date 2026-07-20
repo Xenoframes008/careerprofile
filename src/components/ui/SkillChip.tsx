@@ -1,7 +1,6 @@
-"use client";
-
-import { motion } from "framer-motion";
-import { ProficiencyRing, proficiencyLabel } from "@/components/ui/ProficiencyRing";
+import { ProficiencyRing } from "@/components/ui/ProficiencyRing";
+import { Reveal } from "@/components/ui/Reveal";
+import { proficiencyLabel } from "@/lib/utils";
 import type { Skill } from "@/types";
 
 interface SkillChipProps {
@@ -13,12 +12,14 @@ export function SkillChip({ skill, index = 0 }: SkillChipProps) {
   const delay = (index % 8) * 0.05;
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 10, scale: 0.94 }}
-      whileInView={{ opacity: 1, y: 0, scale: 1 }}
-      viewport={{ once: true, margin: "-20px" }}
+    <Reveal
+      y={10}
+      scale={0.94}
+      margin="-20px"
+      duration={0.35}
+      delay={delay}
+      staggerStep={0}
       whileHover={{ y: -3 }}
-      transition={{ duration: 0.35, delay, ease: "easeOut" }}
       className="glass group relative flex items-center gap-2.5 rounded-full py-1.5 pr-2 pl-3.5 transition-colors duration-300 hover:border-border-strong"
     >
       <span className="text-xs font-medium text-foreground sm:text-sm">
@@ -32,6 +33,6 @@ export function SkillChip({ skill, index = 0 }: SkillChipProps) {
       >
         {proficiencyLabel(skill.level)}
       </span>
-    </motion.div>
+    </Reveal>
   );
 }

@@ -11,6 +11,8 @@ import {
   Wrench,
 } from "lucide-react";
 import type { ExperienceItem } from "@/types";
+import { Reveal } from "@/components/ui/Reveal";
+import { Spotlight } from "@/components/ui/Spotlight";
 import { cn } from "@/lib/utils";
 
 interface TimelineItemProps {
@@ -43,11 +45,15 @@ export function TimelineItem({ item, index }: TimelineItemProps) {
   const panelId = `experience-panel-${index}`;
 
   return (
-    <motion.li
-      initial={{ opacity: 0, x: -24 }}
-      whileInView={{ opacity: 1, x: 0 }}
-      viewport={{ once: true, margin: "-60px" }}
-      transition={{ duration: 0.55, ease: "easeOut", delay: (index % 5) * 0.06 }}
+    <Reveal
+      as="li"
+      x={-24}
+      y={0}
+      margin="-60px"
+      duration={0.55}
+      index={index}
+      maxStagger={5}
+      staggerStep={0.06}
       className="relative pl-14 sm:pl-16"
     >
       <span
@@ -64,7 +70,10 @@ export function TimelineItem({ item, index }: TimelineItemProps) {
         )}
       </span>
 
-      <div className="glass overflow-hidden rounded-2xl transition-colors duration-300 hover:border-border-strong">
+      <Spotlight
+        size={360}
+        className="glass overflow-hidden rounded-2xl transition-colors duration-300 hover:border-border-strong"
+      >
         <button
           type="button"
           onClick={() => setIsOpen((prev) => !prev)}
@@ -185,7 +194,7 @@ export function TimelineItem({ item, index }: TimelineItemProps) {
             </motion.div>
           )}
         </AnimatePresence>
-      </div>
-    </motion.li>
+      </Spotlight>
+    </Reveal>
   );
 }

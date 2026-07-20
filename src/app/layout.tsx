@@ -5,6 +5,7 @@ import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { BackgroundDecor } from "@/components/layout/BackgroundDecor";
 import { SkipLink } from "@/components/ui/SkipLink";
+import { TopProgressBar } from "@/components/ui/TopProgressBar";
 import { StructuredData } from "@/components/seo/StructuredData";
 import { siteConfig } from "@/config/site";
 import "./globals.css";
@@ -99,6 +100,7 @@ export default function RootLayout({
       <body id="top" className="min-h-full flex flex-col bg-background text-foreground">
         <StructuredData />
         <MotionConfig reducedMotion="user">
+          <TopProgressBar />
           <SkipLink />
           <BackgroundDecor />
           <Navbar />

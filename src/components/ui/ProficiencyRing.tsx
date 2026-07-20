@@ -4,22 +4,10 @@ import { useId } from "react";
 import { motion } from "framer-motion";
 import type { ProficiencyLevel } from "@/types";
 
-const LABELS: Record<ProficiencyLevel, string> = {
-  1: "Beginner",
-  2: "Familiar",
-  3: "Proficient",
-  4: "Advanced",
-  5: "Expert",
-};
-
 interface ProficiencyRingProps {
   level: ProficiencyLevel;
   size?: number;
   delay?: number;
-}
-
-export function proficiencyLabel(level: ProficiencyLevel) {
-  return LABELS[level];
 }
 
 export function ProficiencyRing({ level, size = 26, delay = 0 }: ProficiencyRingProps) {

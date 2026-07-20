@@ -21,9 +21,9 @@ export function Footer() {
           </div>
 
           <div>
-            <h2 className="text-sm font-semibold tracking-wide text-foreground">
+            <h3 className="text-sm font-semibold tracking-wide text-foreground">
               Navigate
-            </h2>
+            </h3>
             <ul className="mt-4 space-y-3">
               {navItems.map((item) => (
                 <li key={item.href}>
@@ -39,9 +39,9 @@ export function Footer() {
           </div>
 
           <div>
-            <h2 className="text-sm font-semibold tracking-wide text-foreground">
+            <h3 className="text-sm font-semibold tracking-wide text-foreground">
               Get in touch
-            </h2>
+            </h3>
             <ul className="mt-4 space-y-3 text-sm text-foreground-muted">
               <li>
                 <a

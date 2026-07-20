@@ -1,35 +1,9 @@
 import { NextResponse } from "next/server";
-
-const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-interface ContactPayload {
-  name?: string;
-  email?: string;
-  subject?: string;
-  message?: string;
-}
-
-function validate(payload: ContactPayload) {
-  const errors: Record<string, string> = {};
-
-  if (!payload.name || payload.name.trim().length < 2) {
-    errors.name = "Please enter your name.";
-  }
-  if (!payload.email || !EMAIL_REGEX.test(payload.email.trim())) {
-    errors.email = "Please enter a valid email address.";
-  }
-  if (!payload.subject || payload.subject.trim().length < 3) {
-    errors.subject = "Please add a short subject.";
-  }
-  if (!payload.message || payload.message.trim().length < 10) {
-    errors.message = "Message should be at least 10 characters.";
-  }
-
-  return errors;
-}
+import { validateContactForm } from "@/lib/contactValidation";
+import type { ContactFormValues } from "@/types";
 
 export async function POST(request: Request) {
-  let payload: ContactPayload;
+  let payload: Partial<ContactFormValues>;
 
   try {
     payload = await request.json();
@@ -37,7 +11,7 @@ export async function POST(request: Request) {
     return NextResponse.json({ ok: false, message: "Invalid request body." }, { status: 400 });
   }
 
-  const errors = validate(payload);
+  const errors = validateContactForm(payload);
 
   if (Object.keys(errors).length > 0) {
     return NextResponse.json({ ok: false, errors }, { status: 422 });

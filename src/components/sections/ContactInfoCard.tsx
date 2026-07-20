@@ -1,5 +1,6 @@
 import { Github, Linkedin, Mail, MapPin } from "lucide-react";
 import { SocialLinks } from "@/components/ui/SocialLinks";
+import { Spotlight } from "@/components/ui/Spotlight";
 import { siteConfig } from "@/config/site";
 
 const INFO_ITEMS = [
@@ -31,7 +32,7 @@ const INFO_ITEMS = [
 
 export function ContactInfoCard() {
   return (
-    <div className="glass rounded-2xl p-6 sm:p-7">
+    <Spotlight className="glass rounded-2xl p-6 sm:p-7">
       <h3 className="text-base font-semibold text-foreground">Contact details</h3>
       <ul className="mt-5 space-y-4">
         {INFO_ITEMS.map(({ icon: Icon, label, value, href }) => (
@@ -62,6 +63,6 @@ export function ContactInfoCard() {
         <p className="mb-4 text-xs text-foreground-muted">Find me elsewhere</p>
         <SocialLinks />
       </div>
-    </div>
+    </Spotlight>
   );
 }

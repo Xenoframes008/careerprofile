@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
@@ -14,6 +14,9 @@ import { cn } from "@/lib/utils";
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [hoveredHref, setHoveredHref] = useState<string | null>(null);
+  const menuToggleRef = useRef<HTMLButtonElement>(null);
+  const firstMenuLinkRef = useRef<HTMLAnchorElement>(null);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 12);
@@ -25,15 +28,19 @@ export function Navbar() {
   useEffect(() => {
     if (!menuOpen) return;
 
+    const toggleButton = menuToggleRef.current;
     document.body.style.overflow = "hidden";
+    const focusFrame = requestAnimationFrame(() => firstMenuLinkRef.current?.focus());
     const onKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") setMenuOpen(false);
     };
     window.addEventListener("keydown", onKeyDown);
 
     return () => {
+      cancelAnimationFrame(focusFrame);
       document.body.style.overflow = "";
       window.removeEventListener("keydown", onKeyDown);
+      toggleButton?.focus();
     };
   }, [menuOpen]);
 
@@ -49,12 +56,23 @@ export function Navbar() {
           <Logo />
 
           <nav aria-label="Primary" className="hidden lg:block">
-            <ul className="flex items-center gap-1">
+            <ul
+              className="flex items-center gap-1"
+              onMouseLeave={() => setHoveredHref(null)}
+            >
               {navItems.map((item) => (
-                <li key={item.href}>
+                <li key={item.href} className="relative">
+                  {hoveredHref === item.href && (
+                    <motion.span
+                      layoutId="nav-hover-pill"
+                      className="absolute inset-0 rounded-full bg-surface/[0.08]"
+                      transition={{ type: "spring", stiffness: 420, damping: 32 }}
+                    />
+                  )}
                   <Link
                     href={item.href}
-                    className="focus-ring block rounded-full px-4 py-2 text-sm font-medium text-foreground-muted transition-colors duration-200 hover:text-foreground"
+                    onMouseEnter={() => setHoveredHref(item.href)}
+                    className="focus-ring relative z-10 block rounded-full px-4 py-2 text-sm font-medium text-foreground-muted transition-colors duration-200 hover:text-foreground"
                   >
                     {item.label}
                   </Link>
@@ -70,6 +88,7 @@ export function Navbar() {
           </div>
 
           <button
+            ref={menuToggleRef}
             type="button"
             onClick={() => setMenuOpen((prev) => !prev)}
             aria-expanded={menuOpen}
@@ -97,7 +116,7 @@ export function Navbar() {
             className="lg:hidden"
           >
             <Container className="mt-3">
-              <div className="glass-strong flex flex-col gap-1 rounded-2xl p-4">
+              <nav aria-label="Mobile" className="glass-strong flex flex-col gap-1 rounded-2xl p-4">
                 {navItems.map((item, index) => (
                   <motion.div
                     key={item.href}
@@ -106,6 +125,7 @@ export function Navbar() {
                     transition={{ duration: 0.2, delay: index * 0.04 }}
                   >
                     <Link
+                      ref={index === 0 ? firstMenuLinkRef : undefined}
                       href={item.href}
                       onClick={() => setMenuOpen(false)}
                       className="focus-ring block rounded-xl px-4 py-3 text-base font-medium text-foreground-muted transition-colors hover:bg-surface/[0.06] hover:text-foreground"
@@ -121,7 +141,7 @@ export function Navbar() {
                     Let&apos;s talk
                   </Button>
                 </div>
-              </div>
+              </nav>
             </Container>
           </motion.div>
         )}

@@ -1,9 +1,7 @@
-"use client";
-
-import { motion } from "framer-motion";
 import { Sparkles } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
+import { Reveal } from "@/components/ui/Reveal";
 import { CertificationCard } from "@/components/sections/CertificationCard";
 import { certifications } from "@/config/certifications";
 
@@ -26,11 +24,9 @@ export function Certifications() {
             />
           ))}
 
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-40px" }}
-            transition={{ duration: 0.5, delay: (certifications.length % 6) * 0.08, ease: "easeOut" }}
+          <Reveal
+            index={certifications.length}
+            y={24}
             className="glass flex min-h-[220px] flex-col items-center justify-center gap-3 rounded-2xl border-dashed p-6 text-center"
           >
             <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-surface/[0.08] text-accent-secondary">
@@ -42,7 +38,7 @@ export function Certifications() {
             <p className="text-xs leading-5 text-foreground-muted">
               New credentials will appear here automatically as they&apos;re earned.
             </p>
-          </motion.div>
+          </Reveal>
         </div>
       </Container>
     </section>

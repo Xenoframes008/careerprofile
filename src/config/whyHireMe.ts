@@ -6,17 +6,10 @@ import {
   ShieldCheck,
   Sparkles,
   TrendingUp,
-  type LucideIcon,
 } from "lucide-react";
-import type { StatItem } from "@/types";
+import type { IconCardData, StatItem } from "@/types";
 
-export interface RecruiterTrait {
-  icon: LucideIcon;
-  title: string;
-  description: string;
-}
-
-export const recruiterTraits: RecruiterTrait[] = [
+export const recruiterTraits: IconCardData[] = [
   {
     icon: ScanSearch,
     title: "Attention to Detail",

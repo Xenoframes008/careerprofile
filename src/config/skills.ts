@@ -16,7 +16,7 @@ export interface SkillCategory extends SkillCategoryData {
   icon: LucideIcon;
 }
 
-export const skillCategories: SkillCategory[] = [
+export const skillCategories = [
   {
     id: "manual-testing",
     title: "Manual Testing",
@@ -114,4 +114,4 @@ export const skillCategories: SkillCategory[] = [
       { name: "Git", level: 3 },
     ],
   },
-];
+] satisfies SkillCategory[];

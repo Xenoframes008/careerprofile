@@ -1,11 +1,11 @@
-"use client";
-
 import { Download } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { IconCard } from "@/components/ui/IconCard";
 import { StatCard } from "@/components/ui/StatCard";
 import { Button } from "@/components/ui/Button";
+import { Reveal } from "@/components/ui/Reveal";
+import { Spotlight } from "@/components/ui/Spotlight";
 import { recruiterTraits, recruiterStats } from "@/config/whyHireMe";
 import { siteConfig } from "@/config/site";
 
@@ -37,15 +37,20 @@ export function WhyHireMe() {
           ))}
         </div>
 
-        <div className="glass-strong mt-14 flex flex-col items-center gap-5 rounded-3xl p-10 text-center sm:p-14">
-          <p className="max-w-xl text-lg font-semibold text-foreground sm:text-xl">
-            Ready to see the full picture — roles, tools and results in one place?
-          </p>
-          <Button href={siteConfig.resumeUrl} size="lg" download>
-            <Download className="h-5 w-5" aria-hidden="true" />
-            Download Resume
-          </Button>
-        </div>
+        <Reveal className="mt-14">
+          <Spotlight
+            size={420}
+            className="glass-strong flex flex-col items-center gap-5 rounded-3xl p-10 text-center sm:p-14"
+          >
+            <p className="max-w-xl text-lg font-semibold text-foreground sm:text-xl">
+              Ready to see the full picture — roles, tools and results in one place?
+            </p>
+            <Button href={siteConfig.resumeUrl} size="lg" download>
+              <Download className="h-5 w-5" aria-hidden="true" />
+              Download Resume
+            </Button>
+          </Spotlight>
+        </Reveal>
       </Container>
     </section>
   );

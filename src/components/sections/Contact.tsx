@@ -1,8 +1,6 @@
-"use client";
-
-import { motion } from "framer-motion";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
+import { Reveal } from "@/components/ui/Reveal";
 import { ContactForm } from "@/components/sections/ContactForm";
 import { ContactInfoCard } from "@/components/sections/ContactInfoCard";
 import { MapPlaceholder } from "@/components/sections/MapPlaceholder";
@@ -18,25 +16,14 @@ export function Contact() {
         />
 
         <div className="mt-16 grid gap-6 lg:grid-cols-[1.1fr_1fr]">
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-40px" }}
-            transition={{ duration: 0.5, ease: "easeOut" }}
-          >
+          <Reveal y={24}>
             <ContactForm />
-          </motion.div>
+          </Reveal>
 
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-40px" }}
-            transition={{ duration: 0.5, delay: 0.1, ease: "easeOut" }}
-            className="flex flex-col gap-6"
-          >
+          <Reveal y={24} delay={0.1} className="flex flex-col gap-6">
             <ContactInfoCard />
             <MapPlaceholder />
-          </motion.div>
+          </Reveal>
         </div>
       </Container>
     </section>

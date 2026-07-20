@@ -16,19 +16,13 @@ import {
   Target,
   Users,
   Workflow,
-  type LucideIcon,
 } from "lucide-react";
-
-export interface AboutCardData {
-  icon: LucideIcon;
-  title: string;
-  description: string;
-}
+import type { IconCardData } from "@/types";
 
 export const professionalSummary =
   "With over five years in software quality assurance, I've built my career at the intersection of meticulous testing and pragmatic engineering. I currently lead QA delivery for an enterprise Workforce Management platform at Expleo, coordinating release readiness across two international markets. My path started in game testing at Ubisoft — where I learned that quality means protecting the player's experience — and has since grown into enterprise-grade functional, regression and API testing, backed by SQL validation and Python/AI-assisted automation tooling. I'm ISTQB® Certified and based in Dublin, Ireland, where I continue to mentor QA engineers and champion testing as a craft, not a checkbox.";
 
-export const careerHighlights: AboutCardData[] = [
+export const careerHighlights: IconCardData[] = [
   {
     icon: Rocket,
     title: "QA Lead, Workforce Management Programme",
@@ -67,7 +61,7 @@ export const careerHighlights: AboutCardData[] = [
   },
 ];
 
-export const strengths: AboutCardData[] = [
+export const strengths: IconCardData[] = [
   {
     icon: ClipboardList,
     title: "Test Strategy & Planning",
@@ -106,7 +100,7 @@ export const strengths: AboutCardData[] = [
   },
 ];
 
-export const workPhilosophy: AboutCardData[] = [
+export const workPhilosophy: IconCardData[] = [
   {
     icon: Handshake,
     title: "Quality is a team sport",
@@ -127,7 +121,7 @@ export const workPhilosophy: AboutCardData[] = [
   },
 ];
 
-export const personalInterests: AboutCardData[] = [
+export const personalInterests: IconCardData[] = [
   {
     icon: Code2,
     title: "Building Automation Frameworks",

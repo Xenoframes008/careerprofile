@@ -16,7 +16,10 @@ export const siteConfig = {
     "ISTQB® Certified Tester",
     "Quality Advocate",
   ],
-  url: "https://atanusamadder.dev",
+  // Overridable via NEXT_PUBLIC_SITE_URL so preview/staging deployments
+  // (e.g. on Vercel) generate correct canonical URLs, OG images and JSON-LD
+  // without a code change — falls back to the production domain.
+  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://atanusamadder.dev",
   ogImage: "/opengraph-image",
   resumeUrl: "/resume.pdf",
   keywords: [

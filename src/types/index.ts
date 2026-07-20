@@ -1,6 +1,23 @@
+import type { LucideIcon } from "lucide-react";
+
 export interface NavItem {
   label: string;
   href: string;
+}
+
+/** Shared shape for the icon + title + description cards used across the
+ * About and Why-Hire-Me sections (rendered via `IconCard`). */
+export interface IconCardData {
+  icon: LucideIcon;
+  title: string;
+  description: string;
+}
+
+export interface ContactFormValues {
+  name: string;
+  email: string;
+  subject: string;
+  message: string;
 }
 
 export interface SocialLink {

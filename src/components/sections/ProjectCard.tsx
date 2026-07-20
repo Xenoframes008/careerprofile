@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { ArrowUpRight, Github, Layers } from "lucide-react";
 import { ProjectThumbnail } from "@/components/ui/ProjectThumbnail";
 import { ProjectDetailsModal } from "@/components/sections/ProjectDetailsModal";
+import { Spotlight } from "@/components/ui/Spotlight";
 import type { Project } from "@/types";
 
 interface ProjectCardProps {
@@ -25,8 +26,9 @@ export function ProjectCard({ project, index = 0 }: ProjectCardProps) {
         exit={{ opacity: 0, y: -12 }}
         whileHover={{ y: -6 }}
         transition={{ duration: 0.4, delay: (index % 6) * 0.06, ease: "easeOut" }}
-        className="glass group flex h-full flex-col overflow-hidden rounded-2xl transition-colors duration-300 hover:border-border-strong"
+        className="h-full"
       >
+        <Spotlight className="glass group flex h-full flex-col overflow-hidden rounded-2xl transition-colors duration-300 hover:border-border-strong">
         <div className="p-4 pb-0 sm:p-5 sm:pb-0">
           <ProjectThumbnail title={project.title} status={project.status} />
         </div>
@@ -90,6 +92,7 @@ export function ProjectCard({ project, index = 0 }: ProjectCardProps) {
             )}
           </div>
         </div>
+        </Spotlight>
       </motion.div>
 
       <ProjectDetailsModal

@@ -1,8 +1,8 @@
-import { FolderGit2, Lock, Rocket } from "lucide-react";
+import { FolderGit2, Lock, Rocket, type LucideIcon } from "lucide-react";
 import type { ProjectStatus } from "@/types";
 import { cn } from "@/lib/utils";
 
-const STATUS_STYLES: Record<ProjectStatus, { icon: typeof Lock; label: string }> = {
+const STATUS_STYLES: Record<ProjectStatus, { icon: LucideIcon; label: string }> = {
   "Public Repo": { icon: FolderGit2, label: "Public Repo" },
   "In Progress": { icon: Rocket, label: "In Progress" },
   "Internal / Confidential": { icon: Lock, label: "Internal / Confidential" },

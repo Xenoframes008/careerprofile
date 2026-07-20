@@ -30,16 +30,24 @@ export function HeroPhoto() {
             ? undefined
             : { duration: 6, repeat: Infinity, ease: "easeInOut" }
         }
-        className="glass-strong relative aspect-square overflow-hidden rounded-[2rem]"
+        className="glass-strong relative aspect-square overflow-hidden rounded-[2rem] select-none [-webkit-touch-callout:none]"
+        onContextMenu={(event) => event.preventDefault()}
       >
         <Image
           src="/profile.jpg"
           alt={`${siteConfig.name} — ${siteConfig.role}`}
           fill
           priority
+          draggable={false}
           sizes="(min-width: 1024px) 360px, 300px"
-          className="object-cover object-top"
+          className="pointer-events-none object-cover object-top"
         />
+        {/* Transparent hit layer above the <img> — right-click/long-press
+            lands here instead of the image element, so browsers don't
+            surface a "Save image as" option. A deterrent, not a guarantee:
+            any image rendered in a browser can still be captured via
+            screenshot or devtools, but this blocks the common one-click path. */}
+        <div className="absolute inset-0 z-10" aria-hidden="true" />
         <div className="absolute inset-0 bg-linear-to-t from-background/40 via-transparent to-transparent" />
 
         <div className="absolute inset-0 rounded-[2rem] ring-1 ring-inset ring-border-strong" />

@@ -9,8 +9,10 @@ import { SkillChip } from "@/components/ui/SkillChip";
 import { skillCategories } from "@/config/skills";
 import { cn } from "@/lib/utils";
 
+type CategoryFilter = (typeof skillCategories)[number]["id"] | "all";
+
 export function Skills() {
-  const [activeCategory, setActiveCategory] = useState<string>("all");
+  const [activeCategory, setActiveCategory] = useState<CategoryFilter>("all");
 
   const visibleCategories = useMemo(
     () =>

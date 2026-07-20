@@ -1,10 +1,11 @@
 "use client";
 
 import { useId, useState } from "react";
-import { motion } from "framer-motion";
 import { CalendarDays, Eye, ExternalLink, ShieldCheck } from "lucide-react";
 import { CertificateVisual } from "@/components/ui/CertificateVisual";
 import { Modal } from "@/components/ui/Modal";
+import { Reveal } from "@/components/ui/Reveal";
+import { Spotlight } from "@/components/ui/Spotlight";
 import type { Certification } from "@/types";
 
 interface CertificationCardProps {
@@ -18,14 +19,13 @@ export function CertificationCard({ certification, index = 0 }: CertificationCar
 
   return (
     <>
-      <motion.div
-        initial={{ opacity: 0, y: 24 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-40px" }}
+      <Reveal
+        index={index}
+        y={24}
         whileHover={{ y: -6 }}
-        transition={{ duration: 0.5, delay: (index % 6) * 0.08, ease: "easeOut" }}
-        className="glass group flex h-full flex-col overflow-hidden rounded-2xl transition-colors duration-300 hover:border-border-strong"
+        className="h-full"
       >
+        <Spotlight className="glass group flex h-full flex-col overflow-hidden rounded-2xl transition-colors duration-300 hover:border-border-strong">
         <div className="p-4 pb-0 sm:p-5 sm:pb-0">
           <CertificateVisual
             title={certification.title}
@@ -82,7 +82,8 @@ export function CertificationCard({ certification, index = 0 }: CertificationCar
             )}
           </div>
         </div>
-      </motion.div>
+        </Spotlight>
+      </Reveal>
 
       <Modal isOpen={isOpen} onClose={() => setIsOpen(false)} labelledBy={titleId}>
         <CertificateVisual
