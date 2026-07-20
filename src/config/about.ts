@@ -7,7 +7,7 @@ export const aboutCards: IconCardData[] = [
     icon: UserRound,
     title: "Who I Am",
     description:
-      "Senior Software QA Engineer based in Dublin. Five years from game QA at Ubisoft to leading enterprise quality delivery at Expleo. ISTQB® Certified.",
+      "Senior Software Quality Assurance Analyst based in Dublin. Acting QA Lead on my current client engagement at Expleo, with five years from game QA at Ubisoft to enterprise quality delivery. ISTQB® Certified.",
   },
   {
     icon: Target,

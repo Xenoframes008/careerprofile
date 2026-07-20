@@ -1,7 +1,7 @@
 # Atanu Samadder — Portfolio
 
-A premium, single-page portfolio for **Atanu Samadder**, a Senior Software QA
-Engineer based in Dublin, Ireland. Built with Next.js 15 (App Router),
+A premium, single-page portfolio for **Atanu Samadder**, a Senior Software Quality Assurance
+Analyst and Acting QA Lead based in Dublin, Ireland. Built with Next.js 15 (App Router),
 TypeScript, Tailwind CSS v4 and Framer Motion — dark-mode-first, glassmorphic,
 fully responsive, accessible and SEO-optimized.
 

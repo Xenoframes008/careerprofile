@@ -3,7 +3,7 @@ import type { ExperienceItem } from "@/types";
 export const experience: ExperienceItem[] = [
   {
     company: "Expleo Group",
-    role: "Software QA Analyst — Acting QA Lead",
+    role: "Senior Software Quality Assurance Analyst — Acting QA Lead",
     startDate: "Jan 2025",
     endDate: "Present",
     current: true,

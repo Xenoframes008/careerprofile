@@ -12,7 +12,7 @@ export function Contact() {
         <SectionHeading
           eyebrow="Contact"
           title="Let's build something reliable together"
-          description="Open to Software QA, Test Automation and Quality Engineering opportunities in Dublin and beyond. Drop a message and I'll get back to you soon."
+          description="Open to Senior Software Quality Assurance Analyst and Acting QA Lead opportunities in Dublin and beyond. Drop a message and I'll get back to you soon."
         />
 
         <div className="mt-16 grid gap-6 lg:grid-cols-[1.1fr_1fr]">

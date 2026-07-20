@@ -18,7 +18,7 @@ export function Logo() {
           Atanu Samadder
         </span>
         <span className="text-[11px] font-medium tracking-wide text-foreground-muted">
-          QA Engineer
+          Senior QA Analyst
         </span>
       </span>
     </Link>
