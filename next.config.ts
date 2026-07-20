@@ -7,6 +7,13 @@ import path from "path";
 // root and 404 — leaving an unstyled page with no animations. Leave the env
 // unset (or empty) when hosting at a custom-domain apex like atanusamadder.dev.
 const basePath = (process.env.NEXT_PUBLIC_BASE_PATH ?? "").replace(/\/$/, "");
+// Prefer an absolute asset CDN/prefix so stylesheets never resolve relative to
+// the wrong origin path (helps when a tab still has a stale document cached).
+const assetPrefix = (
+  process.env.NEXT_PUBLIC_ASSET_PREFIX ??
+  process.env.NEXT_PUBLIC_SITE_URL ??
+  basePath
+).replace(/\/$/, "");
 
 const nextConfig: NextConfig = {
   // Pins the workspace root to this project directory. Without this, Next.js
@@ -21,15 +28,12 @@ const nextConfig: NextConfig = {
   // Next's Image Optimization API or dynamic API routes, so both are
   // disabled/avoided in favor of static-export-compatible equivalents.
   output: "export",
+  trailingSlash: true,
   images: {
     unoptimized: true,
   },
-  ...(basePath
-    ? {
-        basePath,
-        assetPrefix: basePath,
-      }
-    : {}),
+  ...(basePath ? { basePath } : {}),
+  ...(assetPrefix ? { assetPrefix } : {}),
 };
 
 export default nextConfig;

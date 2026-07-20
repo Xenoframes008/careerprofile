@@ -5,6 +5,7 @@ import { motion, useReducedMotion } from "framer-motion";
 import { ShieldCheck, TestTube2 } from "lucide-react";
 import { FloatingBadge } from "@/components/ui/FloatingBadge";
 import { siteConfig } from "@/config/site";
+import { withBasePath } from "@/lib/utils";
 
 export function HeroPhoto() {
   const prefersReducedMotion = useReducedMotion();
@@ -34,7 +35,7 @@ export function HeroPhoto() {
         onContextMenu={(event) => event.preventDefault()}
       >
         <Image
-          src="/profile.jpg"
+          src={withBasePath("/profile.jpg")}
           alt={`${siteConfig.name} — ${siteConfig.role}`}
           fill
           priority

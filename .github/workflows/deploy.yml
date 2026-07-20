@@ -37,6 +37,10 @@ jobs:
           npm run lint
           npm run type-check
 
+      - name: Setup Pages
+        id: pages
+        uses: actions/configure-pages@v5
+
       - name: Build static export
         env:
           # Project Pages URL is /careerprofile — must prefix all asset paths
@@ -44,10 +48,8 @@ jobs:
           # once the custom apex domain is the only public URL.
           NEXT_PUBLIC_BASE_PATH: /careerprofile
           NEXT_PUBLIC_SITE_URL: https://xenoframes008.github.io/careerprofile
+          NEXT_PUBLIC_ASSET_PREFIX: https://xenoframes008.github.io/careerprofile
         run: npm run build
-
-      - name: Setup Pages
-        uses: actions/configure-pages@v5
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
