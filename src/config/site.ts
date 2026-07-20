@@ -8,14 +8,20 @@ export const siteConfig = {
   tagline: "Building confidence in software, one test at a time.",
   description:
     "Portfolio of Atanu Samadder, a Senior Software QA Engineer based in Dublin, Ireland, specializing in test automation, manual & exploratory testing, and quality-first software delivery.",
-  introduction:
-    "I'm a Senior Software QA Engineer based in Dublin, Ireland, with 5+ years of experience delivering enterprise-grade quality across the full testing lifecycle. ISTQB® Certified, I specialize in functional & regression testing, SQL-driven data validation, defect triage, and building resilient automation frameworks with Playwright and Selenium that help teams ship with confidence.",
-  roles: [
-    "Software QA Engineer",
-    "Test Automation Specialist",
-    "ISTQB® Certified Tester",
-    "Quality Advocate",
-  ],
+  /** Hero-only copy — kept short so recruiters grasp value in ~5 seconds. */
+  hero: {
+    title: "Software QA Engineer",
+    subtitle: "Enterprise Quality Engineering",
+    headline: "5+ years delivering enterprise software quality.",
+    specialties: [
+      "Manual Testing",
+      "Test Automation",
+      "SQL Validation",
+      "REST API Testing",
+      "Playwright",
+      "ISTQB Certified",
+    ],
+  },
   // Overridable via NEXT_PUBLIC_SITE_URL so preview/staging deployments
   // (e.g. on Vercel) generate correct canonical URLs, OG images and JSON-LD
   // without a code change — falls back to the production domain.
